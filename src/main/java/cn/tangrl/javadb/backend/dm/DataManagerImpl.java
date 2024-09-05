@@ -19,6 +19,8 @@ import cn.tangrl.javadb.common.Error;
  * DM模块实现类
  * 继承AbstractCache类和实现DataManager接口
  * DataManager 是 DM 层直接对外提供方法的类，同时，也实现成 DataItem 对象的缓存。
+ * DataItem 存储的 key，是由页号和页内偏移组成的一个 8 字节无符号整数，页号和偏移各占 4 字节。
+ * DM 层提供了三个功能供上层使用，分别是读、插入和修改。修改是通过读出的 DataItem 实现的，于是 DataManager 只需要提供 read() 和 insert() 方法。
  */
 public class DataManagerImpl extends AbstractCache<DataItem> implements DataManager {
     /**
@@ -73,9 +75,9 @@ public class DataManagerImpl extends AbstractCache<DataItem> implements DataMana
         return di;
     }
 
-    // TODO 为什么insert不上锁？
+    // TODO 为什么 insert 不上锁？
     /**
-     * 将有效数据包裹成DataItem并插入到页中
+     * 将有效数据包裹成 DataItem 并插入到页中
      * 1. 在 pageIndex 中获取一个足以存储插入内容的页面的页号
      * 2. 获取页面后，首先需要写入插入日志
      * 3. 通过 pageX 插入数据，并返回插入位置的偏移
@@ -178,7 +180,7 @@ public class DataManagerImpl extends AbstractCache<DataItem> implements DataMana
     }
 
     /**
-     * DataItem 缓存释放，需要将 DataItem 写回数据源，由于对文件的读写是以页为单位进行的，只需要将 DataItem 所在的页 release 即可：
+     * DataItem 缓存释放，需要将 DataItem 写回数据源，由于对文件的读写是以页为单位进行的，只需要将 DataItem 所在的页 release 即可。
      * @param di
      */
     @Override

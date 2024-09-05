@@ -12,6 +12,10 @@ import cn.tangrl.javadb.backend.dm.pageCache.PageCache;
  * 页面索引的设计用于提高在数据库中进行插入操作时的效率
  * 它缓存了每一页的空闲空间信息，以便在进行插入操作时能够快速找到合适的页面，而无需遍历磁盘或者缓存中的所有页面
  * 在数据库启动时，会遍历所有页面，将每个页面的空闲空间信息分配到这些区间中
+ *
+ * List<PageInfo>[] lists
+ * lists[i] 是一个数组，存储了有i个空闲区块的页面。
+ * 每个区块大小为  PageCache.PAGE_SIZE / INTERVALS_NO
  */
 public class PageIndex {
     /**

@@ -13,7 +13,7 @@ public class ParseStringRes {
      */
     public String str;
     /**
-     * 包裹数组的长度，下一个包裹数组也是这个长度。
+     * 表示下一个字符串开始的位置 [StringLength][StringData]
      */
     public int next;
 

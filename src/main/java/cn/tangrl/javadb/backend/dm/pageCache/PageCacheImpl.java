@@ -43,8 +43,9 @@ public class PageCacheImpl extends AbstractCache<Page> implements PageCache {
     private Lock fileLock;
     /**
      * 数据库文件页数
-     * 这个数字在数据库文件被打开时就会被计算，并在新建页面时自增
+     * 记录了当前打开的数据库文件有多少页。这个数字在数据库文件被打开时就会被计算，并在新建页面时自增。
      * 原子整型
+     * 注意，同一条数据是不允许跨页存储的，单条数据的大小不能超过数据库页面的大小。
      */
     private AtomicInteger pageNumbers;
 

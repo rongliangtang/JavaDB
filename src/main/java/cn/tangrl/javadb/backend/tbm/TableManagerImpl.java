@@ -30,9 +30,12 @@ public class TableManagerImpl implements TableManager {
      */
     private Booter booter;
     /**
-     * 表的缓存
+     * 加载表的时候，把表的信息加载到 tableCache map 中，key 为 表名，value 为 Table 对象
      */
     private Map<String, Table> tableCache;
+    /**
+     * 创建表的时候，把事务的加载到 xidTableCache map 中，key 为 xid，value 为 List<Table>，表示 xid 事务下，操作的表有哪些
+     */
     private Map<Long, List<Table>> xidTableCache;
     private Lock lock;
 
@@ -54,6 +57,7 @@ public class TableManagerImpl implements TableManager {
 
     /**
      * 加载表
+     * 把表的信息加载到 tableCache map 中，key 为 表名，value 为 Table 对象
      */
     private void loadTables() {
         long uid = firstTableUid();
@@ -147,6 +151,7 @@ public class TableManagerImpl implements TableManager {
 
     /**
      * 执行create语句
+     * 在创建新表时，采用的时头插法，所以每次创建表都需要更新 Booter 文件
      * @param xid
      * @param create
      * @return
@@ -192,7 +197,7 @@ public class TableManagerImpl implements TableManager {
     }
 
     /**
-     * 执行read语句
+     * 执行read语句，即 select
      * @param xid
      * @param read
      * @return

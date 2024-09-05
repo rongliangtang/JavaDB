@@ -36,7 +36,8 @@ public class DataItemImpl implements DataItem {
      */
     private SubArray raw;
     /**
-     * 用于存放就数据的数据，大小与DataItem一样
+     * 用于存放旧数据的数据，大小与DataItem一样
+     * 实际上 oldRaw 是修改数据前的一个快照
      */
     private byte[] oldRaw;
     /**
@@ -136,6 +137,7 @@ public class DataItemImpl implements DataItem {
     @Override
     public void after(long xid) {
         // 对修改操作落日志
+        // 这确保即使在实际修改之后立即崩溃，也可以通过日志恢复到修改前的状态。
         dm.logDataItem(xid, this);
         // 对写锁解锁
         wLock.unlock();

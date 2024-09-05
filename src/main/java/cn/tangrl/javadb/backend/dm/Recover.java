@@ -101,10 +101,12 @@ public class Recover {
         System.out.println("Truncate to " + maxPgno + " pages.");
 
         // 重做所有崩溃时已完成（committed 或 aborted）的事务
+        // 保证持久性
         redoTranscations(tm, lg, pc);
         System.out.println("Redo Transactions Over.");
 
         // 撤销所有崩溃时未完成（active）的事务
+        // 保证原子性
         undoTranscations(tm, lg, pc);
         System.out.println("Undo Transactions Over.");
 

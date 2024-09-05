@@ -212,6 +212,7 @@ public class Table {
 
     /**
      * 更新表中的记录，返回更新的记录
+     * update
      * @param xid
      * @param update
      * @return
@@ -274,7 +275,7 @@ public class Table {
 
     /**
      * 插入记录
-     * @param xid
+      * @param xid
      * @param insert
      * @throws Exception
      */
@@ -313,7 +314,8 @@ public class Table {
     }
 
     /**
-     * 解析 Where，返回存储记录的uids
+     * 解析 Where，返回存储记录的 uids，即 DataItem
+     * 目前 Where 只支持两个条件的与和或。
      * @param where
      * @return
      * @throws Exception

@@ -98,7 +98,7 @@ public class VersionManagerImpl extends AbstractCache<Entry> implements VersionM
     }
 
     /**
-     * 将数据包裹成 Entry，无脑交给 DM 插入
+     * 将数据包裹成 Entry，无脑交给 DM 插入，返回 DataItem 的 uid
      * @param xid
      * @param data
      * @return
@@ -120,6 +120,7 @@ public class VersionManagerImpl extends AbstractCache<Entry> implements VersionM
 
     /**
      * 删除entry，传入xid和uid，返回true表示成功删除。
+     * 删除和更新操作的时候回执行这个方法。
      * 1. 可见性判断
      * 2. 获取资源的锁
      * 3. 版本跳跃判断

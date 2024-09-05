@@ -107,7 +107,7 @@ public class BPlusTree {
     }
 
     /**
-     * 在 nodeUid 的node中，搜索key关键字，找到根节点上的uid（即关键字为key的uid dataitem）
+     * 在 nodeUid 的node中，搜索key关键字，找到叶节点上的uid（即关键字为key的uid dataitem）
      * @param nodeUid
      * @param key
      * @return
@@ -154,7 +154,7 @@ public class BPlusTree {
     }
 
     /**
-     * 范围搜索，返回满足的uid dataItem列表
+     * 范围搜索，返回满足的uids，即 DataItem 列表
      * @param leftKey
      * @param rightKey
      * @return

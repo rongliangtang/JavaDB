@@ -30,8 +30,4 @@ public class Launcher {
         Shell shell = new Shell(client);
         shell.run();
     }
-
-
-
-
 }

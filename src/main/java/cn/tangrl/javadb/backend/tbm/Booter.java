@@ -12,6 +12,13 @@ import cn.tangrl.javadb.common.Error;
 /**
  * Booter类
  * 这个文件只存放了第一个表的uid
+ *
+ * 由于 TBM 的表管理，使用的是链表串起的 Table 结构，所以就必须保存一个链表的头节点，即第一个表的 UID，这样在启动时，才能快速找到表信息。
+ * 使用 Booter 类和 bt 文件，来管理数据库的启动信息。
+ * 虽然现在所需的启动信息，只有一个：头表的 UID。
+ * Booter 类对外提供了两个方法：load 和 update，并保证了其原子性。
+ * update 在修改 bt 文件内容时，没有直接对 bt 文件进行修改，而是首先将内容写入一个 bt_tmp 文件中，随后将这个文件重命名为 bt 文件。
+ * 通过操作系统重命名文件的原子性，来保证操作的原子性。
  */
 public class Booter {
     /**
@@ -85,7 +92,7 @@ public class Booter {
     }
 
     /**
-     * 读取file对象的所有字节
+     * 读取 file 对象的所有字节，即读取文件内容
      * @return
      */
     public byte[] load() {
@@ -99,7 +106,8 @@ public class Booter {
     }
 
     /**
-     *
+     * update 在修改 bt 文件内容时，没有直接对 bt 文件进行修改，而是首先将内容写入一个 bt_tmp 文件中，随后将这个文件重命名为 bt 文件。
+     * 通过操作系统重命名文件的原子性，来保证操作的原子性。
      * @param data
      */
     public void update(byte[] data) {

@@ -118,6 +118,7 @@ public class Field {
 
     /**
      * 创建一个字段，返回Field对象
+     * 将相关的信息通过 VM 持久化
      * @param tb
      * @param xid
      * @param fieldName

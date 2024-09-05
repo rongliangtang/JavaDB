@@ -100,6 +100,7 @@ public class LockTable {
                 throw Error.DeadlockException;
             }
             // 创建一个重入锁l
+            // 同一个线程可以重入，因为同一个线程只会顺序执行一个事务，在同一个事务中，已经获取到锁了，当然可以重入
             Lock l = new ReentrantLock();
             // l上锁
             l.lock();

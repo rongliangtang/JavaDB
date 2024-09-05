@@ -9,7 +9,7 @@ import cn.tangrl.javadb.backend.utils.Parser;
  * 存储在硬盘文件中的 普通页 管理类
  * 普通页结构
  * [FreeSpaceOffset] [Data]
- * FreeSpaceOffset: 2字节 空闲位置开始偏移
+ * FreeSpaceOffset: 2字节 空闲数据开始的位置
  * FSO表示空闲位置的起点
  */
 public class PageX {
@@ -69,6 +69,7 @@ public class PageX {
 
     /**
      * 将raw插入pg中，返回插入位置
+     * 在写入之前获取 FSO，来确定写入的位置，并在写入之后更新 FSO。
      * @param pg
      * @param raw
      * @return

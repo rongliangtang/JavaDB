@@ -57,6 +57,8 @@ public class Server {
         ThreadPoolExecutor tpe = new ThreadPoolExecutor(10, 20, 1L, TimeUnit.SECONDS, new ArrayBlockingQueue<>(100), new ThreadPoolExecutor.CallerRunsPolicy());
         try {
             // 进入一个无限循环，持续接受客户端连接。
+            // 为每个客户端连接，创建线程，处理 socket 之间的的执行流程
+            // 用线程池管理 socket
             while(true) {
                 Socket socket = ss.accept();
                 // 创建任务并执行

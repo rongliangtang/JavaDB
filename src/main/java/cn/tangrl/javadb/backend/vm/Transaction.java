@@ -6,7 +6,7 @@ import java.util.Map;
 import cn.tangrl.javadb.backend.tm.TransactionManagerImpl;
 
 /**
- * vm对一个事务的抽象类，用于保存快照数据
+ * vm 对一个事务的抽象类，用于保存快照数据
  * 这个快照存放这个事务t当前activa的事务
  * 在事务 t 开始时，记录下当前活跃的所有事务，用于可重复读隔离级别。
  * 在可重复读隔离级别中，如果记录的某个版本，XMIN 在 t的快照中，也应当对 t 不可见。

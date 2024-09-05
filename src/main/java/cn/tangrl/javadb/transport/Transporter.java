@@ -49,6 +49,7 @@ public class Transporter {
      * @throws Exception
      */
     public void send(byte[] data) throws Exception {
+        // 为了避免特殊字符造成问题，，将传入的buf byte数组转换成16进制的字符串
         String raw = hexEncode(data);
         writer.write(raw);
         // flush会将缓存区的数据强制输出

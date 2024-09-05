@@ -8,7 +8,7 @@ import cn.tangrl.javadb.transport.Packager;
  */
 public class Client {
     /**
-     * 实现客户端的单次收发动作
+     * 实现客户端的单次收发动作的类
      */
     private RoundTripper rt;
 
